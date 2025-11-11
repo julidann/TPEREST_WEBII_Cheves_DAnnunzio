@@ -28,16 +28,31 @@ class ProductApiController
 
     public function getProducts($req, $res)
     {
-        $products = $this->productModel->getAll();
-        $categories = $this->categoryModel->getAll();
+
+        $orderBy = false;
+        if (isset($req->query->orderBy)){
+            $orderBy = $req->query->orderBy;
+        }
+
+        $order = "DESC";
+        if (isset($req->query->order)){
+            $order = $req->query->order;
+        }
+    
+        
+        $filterByCategory = false;
+        if (isset($req->query->filterByCategory)){
+            $filterByCategory = $req->query->filterByCategory;
+        }
+
+        $products = $this->productModel->getAll($orderBy, $order, $filterByCategory);
 
         return $res->json([
             'products' => $products,
-            'categories' => $categories
         ], 200);
     }
 
-    public function getProductDetail($req, $res)
+    public function getProduct($req, $res)
     {
         $id = $req->params->id;
         $product = $this->productModel->get($id);
@@ -74,7 +89,7 @@ class ProductApiController
             return $res->json("El producto con el id=$id no existe", 404);
         }
         $this->productModel->remove($id);
-        return $res->json("El producto con el id=$id se eliminó", 204);
+        return $res->json("El producto con el id=$id se eliminó", 200);
     }
 
 
@@ -97,36 +112,14 @@ class ProductApiController
         $id_category = $req->body->id_category;
 
         $this->productModel->update($id, $name, $img, $model, $price, $description, $id_category);
-        
+
         $updatedProduct = $this->productModel->get($id);
         return $res->json($updatedProduct, 201);
     }
     public function getProductsByCategory($req, $res)
     {
-        $id_category = $req->params->id_category;
+        $id_category = $req->params->id;
         $products = $this->productModel->getProductsByCategory($id_category);
         return $res->json($products, 200);
     }
-
-
-    /*
-    public function showProductsByCategory($id_categoria){
-        $products = $this->model->getProductsByCategory($id_categoria);
-        $category = $this->model->get($id_categoria);
-        $this->view->showProductsByCategory($products, $category);
-    }
-    
-    public function showAddProductForm(){ 
-    $categoryModel = new CategoryModel(); 
-    $categories = $categoryModel->getAll(); 
-    $this->view->showAddProductForm($categories);
-    }
-
-    public function showEditFormProducts($id, $categories){
-        $product = $this->model->get($id);
-        if (!$product) {
-            return $this->view->showError("Producto no encontrado");
-        }
-        $this->view->showEditFormProducts($product, $categories);
-    }*/
 }

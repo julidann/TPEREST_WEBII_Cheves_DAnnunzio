@@ -1,7 +1,5 @@
 <?php
-
 require_once './app/models/category.model.php';
-
 
 /*
 METODOS SIN API REST:       METODOS CON API REST:
@@ -11,16 +9,14 @@ addCategory                 insertCategory
 removeCategory              deleteCategory
 editCategory                updateCategory
 showEditFormCategory        NO HAY VISTAS EN API REST
-
 */
+
 class CategoryApiController
 {
     private $model;
 
-
     function __construct()
     {
-
         $this->model = new CategoryModel();
     }
 
@@ -73,7 +69,7 @@ class CategoryApiController
 
         $this->model->remove($id);
 
-        return $res->json("La categoría con el id=$id se eliminó", 204);
+        return $res->json("La categoría con el id=$id se eliminó", 200);
     }
 
     public function updateCategory($req, $res)
@@ -104,18 +100,4 @@ class CategoryApiController
         return $res->json($updatedCategory, 200);
     }
 
-    /* //ESTO EN TEORIA NO VA EN LA API REST
-    public function showEditFormCategory($id)
-    {
-        $category = $this->model->get($id);
-        $this->view->showEditFormCategory($category);
-    }
-
-     
-    public function showAddCategoryForm()
-    {
-
-        $categories = $this->model->getAll();
-        $this->view->showAddCategoriesForm($categories);
-    }*/
 }

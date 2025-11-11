@@ -1,107 +1,51 @@
 # TPE PARTE 3 APIREST
+# HACER: 
 
-## TPE - Parte 3
-### Consigna
-Para la tercera entrega, se debe continuar la idea del trabajo original. El objetivo es agregar una API REST pública para brindar integración con otros sistemas. Esta API  se debe entregar en un repositorio nuevo, lo único que comparten con el TP anterior es la base de datos.
-
-Los servicios brindados por la API deben cumplir unos requerimientos mínimos* pero idealmente se debe pensar alguna idea original que se adapte a su contexto.
-
-Ejemplos:
-Comercial (Productos y Categorias)
-**API Rest para listar todos los productos en oferta filtrando por categoría. De esta manera otro sitio de terceros podría mostrar una publicidad con los productos en oferta.**
-
-Noticias
-API Rest para listar noticias y realizar comentarios en las noticias. De esta manera se podría generar una app mobile para leer y comentar noticias.
+#### - Ver si tira bien los errores (200,201,400,404)
+#### - Verificar el ordenamiento 
+#### - Verificar el filtro
+#### - Hacer la paginación
+#### - Hacer los README (router y general)
+#### - Agregar tabla reseñas
 
 
-***Requerimientos Funcionales Mínimos**
-La API Rest debe ser RESTful
-***Debe tener al menos un servicio que liste (GET) una colección entera de entidades. FUNCIONA***
-El servicio que lista una colección entera debe poder ordenarse opcionalmente por al menos un campo de la tabla, de manera ascendente o descendente.
-Debe tener al menos un servicio que obtenga (GET) una entidad determinada por su ID.
-Debe tener al menos un servicio para agregar y otro para modificar datos (POST y PUT)
-La API Rest debe manejar de manera adecuada al menos los siguientes códigos de error (200, 201, 400 y 404)
+# CAMBIOS
 
-Requerimientos Funcionales Optativos
-Los opcionales suman un punto cada uno. Se debe completar al menos uno para acceder a la promoción ya que el resto del trabajo sin opcionales suma 6 puntos.
-
-El servicio que obtiene una colección entera debe poder paginar.
-El servicio que obtiene una colección entera debe poder filtrarse por alguno de sus campos.
-El servicio que obtiene una colección entera debe poder ordenarse por cualquiera de los campos de la tabla de manera ascendente o descendente. (A diferencia del obligatorio que es solo por un campo a elección). 
-El servicio debe requerir un token para realizar modificaciones (PUT, POST)
-Requerimientos NO Funcionales OBLIGATORIOS
-Se debe adjuntar documentación de los endpoints generados en el README.md del repositorio. Es decir, una descripción de cada endpoint, cómo se usan y ejemplos. Entender que esta documentación la va a leer otro desarrollador para entender cómo se consume la API.
-
-Aclaraciones
-Respecto al modelo de datos: Se puede (y se alienta) agregar columnas/tablas para que el servicio que agreguen tenga más sentido en su contexto. Ejemplo: Agregar una tabla “reseñas” para almacenar las reseñas via API REST de una película. 
-NOTA: La base de datos es compartida por los dos proyectos. Tener cuidado de no “romper” la primera entrega con los cambios en la DB de la segunda.
-
-Generales:
-
-
-La API REST se debe crear en otro repositorio distinto al trabajo original.
-La base de datos es la misma para los dos (incluirla de todos modos en el nuevo repositorio).
-No es necesario crear un frontend que consuma la API. Queda a total elección del alumno/a si quiere agregar un frontend. Todas las pruebas se harán utilizando POSTMAN (o similar)
-
-
-Criterios de corrección
-Se evaluará la correcta división de responsabilidades en las clases, no repetición de código, identificadores (nombres de clases, variables, etc) descriptivos, etc.
-Los trabajos deben implementar la totalidad de la funcionalidad (ambas entregas) funcionando correctamente. 
-
-El trabajo debe realizarse en equipos de 2, donde a cada miembro se le evaluarán distintas responsabilidades de la siguiente forma:
-Miembro A:
-Listado ordenado
-PUT
-Ordenado por cualquier campo (opcional)
-
-Miembro B:
-Obtener un elemento por ID
-POST
-Filtrado (opcional)
-
-Opcionales que suman a ambos:
-Paginado
-Autenticación Token
-
-
-Entrega
-
-VIERNES 14 DE NOVIEMBRE
-
-La entrega se realizará en un repositorio público de GIT a elección. La URL debe estar subida a la planilla de trabajos en la fecha de entrega pautada
-
-
-
-
-## Cambios vsCode
-- App
+#### App
     - auth-api.controller-php // copiado de los profes
     - category-api.controller.php // actualizado
     - product-api.controller.php // actualizado
 
-- Middlewares
+#### Middlewares
     - guard-api.middlewares.php // copiado de los profes
-- Models // queda igual
-- Config // queda igual
-- Database // queda igual
-    - acá el tp dice de hacer una tabla reseñas (CUIDADO QUE NO ROMPA EL TPE 2!!)
-- Libs // copiado de los profes
-- .htaccess // copiado de los profes
-- api_router.php // actualizado 
+
+#### Database // no se modificó
+    - acá el tp dice de hacer una tabla reseñas 
+    (CUIDADO QUE NO ROMPA EL TPE 2!!)
+
+#### api_router.php
+    - actualizado 
 
 ## Postman
 
 - Descargar postmanAgent (para desktop), así detecta la url local (localhost)
-- Entrar a postman desde la web
-- hacer clic en get stated -> send api request
-- en GET pegar http://localhost/TPE/api/productos
-- y ahi funciona !! importante poner api/productos
-- En api/productos trae todos los productos
-- En api/categorias trae todos los categorias
-- En api/category/1 --> "No autorizado"
 
-### Ver como entrar en login desde postman !!
-
-
-
-   
+#### ***Lo que funciona en postman***
+    - GET api/productos
+    - GET api/productos/id
+    - GET api/categorias/1/productos
+    - GET api/productos?orderBy=name / price /model
+    - GET filterByCategory
+    - GET api/categorias
+    - GET api/categorias/id
+    - POST api/auth/login 
+    // el post/put/delete funciona con auth
+    - POST api/productos
+    - POST api/categorias/id
+    - PUT api/productos/id
+    - PUT api/categorias/id
+    - DELETE api/productos/id
+    - DELETE api/categorias/id
+---- 
+token : 
+   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsInVzdWFyaW8iOiJ3ZWJhZG1pbiIsInJvbGVzIjpbIkFETUlOIiwiVVNFUiIsIkJBTkFOQSJdLCJleHAiOjE3NjI4ODc3NTZ9.xTA-jqHrLuT9B65VxLhyH_iBZFfCG0898G3mVNWDdiU"

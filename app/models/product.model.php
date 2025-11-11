@@ -12,6 +12,57 @@ class ProductModel extends Model{
         return $product;
     }
 
+    public function getAll($orderBy = false, $order = "DESC" ,  $filterByCategory = false) {
+        $sql = 'SELECT p.*, c.name AS category_name FROM products p JOIN categories c ON p.id_category = c.id';
+        $params = [];
+        //ver lo de mayúsculas y minúsculas
+
+        $orderType = "ASC";
+        if ($order ===  "DESC") {
+            $orderType = "DESC";
+        }
+
+        if($orderBy) {
+            //name,img,model,price,description,id_category
+            //img lo ordenamos ??
+            //description lo ordenamos ??
+            //faltaría poner el nombre del id. 
+            switch($orderBy) { 
+                case 'name':
+                    $sql .= " ORDER BY p.name {$orderType}" ;
+                    break;
+                case 'model':
+                    $sql .= " ORDER BY p.model {$orderType}" ;
+                    break;
+                case 'price':
+                    $sql .= " ORDER BY p.price {$orderType}";
+                    break;
+                /*case 'category_name':
+                    $sql .= " ORDER BY p.category_name {$orderType}";
+                    break;*/
+            }
+        }
+
+         if ($filterByCategory) {
+        $sql .= ' WHERE p.id_category = ?';
+        $params[] = $filterByCategory;
+        }
+
+        //FALTA HACER PAGINACIÓN
+
+        
+        
+        $query = $this->db->prepare($sql);
+        $query->execute($params);
+    
+       
+        $products = $query->fetchAll(PDO::FETCH_OBJ); 
+    
+        return $products;
+}
+    
+    /* // función sin paginación, filtrado ni ordenamiento
+
     public function getAll() {
      
         $query = $this->db->prepare( 'SELECT p.*, c.name AS category_name FROM products p JOIN categories c ON p.id_category = c.id');
@@ -20,7 +71,8 @@ class ProductModel extends Model{
         $product = $query->fetchAll(PDO::FETCH_OBJ);
 
         return $product;
-    }
+    }*/
+
     public function getProductsByCategory($id_categoria) {
         
         $query = $this->db->prepare('SELECT p.*, c.name AS category_name FROM products p JOIN categories c ON p.id_category = c.id
