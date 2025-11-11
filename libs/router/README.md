@@ -23,7 +23,7 @@ El archivo `router.php` ya incluye `request.php` y `response.php`, por lo que so
 `Router` representa la tabla de rutas y ejecución del ruteo.
 
 Router API:
-- `addRoute($url, $verb, $controller, $method)`: agrega una ruta. `$url` puede contener parámetros con prefijo `:` (ej. `/api/tareas/:id`). `$verb` es el método HTTP en mayúsculas (`GET`, `POST`, `PUT`, `DELETE`, etc.). `$controller` es el nombre de la clase del controlador (string). `$method` es el nombre del método a invocar en ese controlador.
+- `addRoute($url, $verb, $controller, $method)`: agrega una ruta. `$url` puede contener parámetros con prefijo `:` (ej. `/api/productos/:id`). `$verb` es el método HTTP en mayúsculas (`GET`, `POST`, `PUT`, `DELETE`, etc.). `$controller` es el nombre de la clase del controlador (string). `$method` es el nombre del método a invocar en ese controlador.
 - `setDefaultRoute($controller, $method)`: configura una ruta por defecto que se ejecuta si no coincide ninguna ruta registrada.
 - `addMiddleware($middleware)`: agrega un middleware. El middleware debe tener un método `run($request, $response)` que será ejecutado antes de resolver rutas.
 - `route($url, $verb)`: resuelve y ejecuta la ruta que coincida con la URL y verbo. Antes de buscar rutas, ejecuta todos los middlewares registrados.
@@ -33,15 +33,28 @@ Router API:
 ```
 $router = new Router();
 
-// Rutas REST para tareas
-$router->addRoute('tareas', 'GET', 'TaskApiController', 'getAll');
-$router->addRoute('tareas', 'POST', 'TaskApiController', 'insert');
-$router->addRoute('tareas/:id', 'GET', 'TaskApiController', 'get');
-$router->addRoute('tareas/:id', 'PUT', 'TaskApiController', 'update');
-$router->addRoute('tareas/:id', 'DELETE', 'TaskApiController', 'remove');
+// Rutas REST
+// --- AUTH ---
+$router->addRoute('auth/login', 'POST', 'AuthApiController', 'login');
 
-// Ruta por defecto (opcional)
-$router->setDefaultRoute('TaskApiController', 'notFound');
+// --- PRODUCTOS (públicos) ---
+$router->addRoute('productos', 'GET', 'ProductApiController', 'getProducts');
+$router->addRoute('productos/:id', 'GET', 'ProductApiController', 'getProduct');
+
+// --- CATEGORÍAS (públicas) ---
+$router->addRoute('categorias', 'GET', 'CategoryApiController', 'getCategories');
+$router->addRoute('categorias/:id', 'GET', 'CategoryApiController', 'getCategory');
+$router->addRoute('categorias/:id/productos', 'GET', 'ProductApiController', 'getProductsByCategory');
+
+// --- A partir de acá, requiere autenticación ---
+$router->addMiddleware(new GuardMiddleware());
+
+$router->addRoute('productos', 'POST', 'ProductApiController', 'insertProduct');
+$router->addRoute('productos/:id', 'PUT', 'ProductApiController', 'updateProduct');
+$router->addRoute('productos/:id', 'DELETE', 'ProductApiController', 'deleteProduct');
+$router->addRoute('categorias', 'POST', 'CategoryApiController', 'insertCategory');
+$router->addRoute('categorias/:id', 'PUT', 'CategoryApiController', 'updateCategory');
+$router->addRoute('categorias/:id', 'DELETE', 'CategoryApiController', 'deleteCategory');
 
 // Ejecutar ruteo: pasar la URI solicitada y el método
 $router->route($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
