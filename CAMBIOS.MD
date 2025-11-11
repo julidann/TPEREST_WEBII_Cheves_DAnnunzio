@@ -81,9 +81,9 @@ La entrega se realizará en un repositorio público de GIT a elección. La URL d
 
 - Middlewares
     - guard-api.middlewares.php // copiado de los profes
-- Models // no se modificaron
-- Config // no se modificó
-- Database // no se modificó
+- Models // queda igual
+- Config // queda igual
+- Database // queda igual
     - acá el tp dice de hacer una tabla reseñas (CUIDADO QUE NO ROMPA EL TPE 2!!)
 - Libs // copiado de los profes
 - .htaccess // copiado de los profes
@@ -101,6 +101,7 @@ La entrega se realizará en un repositorio público de GIT a elección. La URL d
 - En api/category/1 --> "No autorizado"
 
 ### Ver como entrar en login desde postman !!
+
 
 
    
