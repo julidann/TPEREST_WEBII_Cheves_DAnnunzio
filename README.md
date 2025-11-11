@@ -9,23 +9,30 @@ README:
 - 
 ### Qué contiene este proyecto:
 
-TP3
-|__ app
-|__ config
-|__ database
+- app/controllers/ --> Controladores
+  - auth-api.controller.php
+  - category-api.controller.php
+  - product-api.controller.php
+- app\middlewares\ --> Seguridad
+  - guard-api.middleware.php
+- app/models/ --> Modelos
+  - model.php
+  - category.model.php
+  - product.model.php
+  - user.model.php
+- config / config.php --> Configuración
+- database/ devices.sql --> Script SQL para crear la base de datos y tablas iniciales.
+- libs/router/ --> Librería interna de ruteo 
+  - jwt/
+    - jwt.middleware.php
+    - jwt.php
+  - router/
+    - README.md --> más info
+    - request.php
+    - router.php
+- api_router.php - Entry point para los endpoints de la API.
+- .htaccess: reglas apache para soportar URL semánticas
 
-
-api_router.php - Entry point para los endpoints de la API.
-app/controllers/ - Controladores, por ejemplo task-api.controller.php.
-app/models/ - Modelos, por ejemplo task.model.php.
-libs/router/ - Librería ligera de ruteo usada por este proyecto.
-database/db_tareas.sql - Script SQL para crear la base de datos y tablas iniciales.
-.htaccess: reglas apache para soportar URL semánticas
-
-Librería de ruteo
-Este proyecto usa una librería interna para rutear peticiones ubicada en libs/router/.
-Consulta la documentación de la librería de ruteo aquí:
-libs/router/README.md
 
 Endpoints
 
