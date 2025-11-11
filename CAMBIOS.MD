@@ -46,6 +46,10 @@
     - PUT api/categorias/id
     - DELETE api/productos/id
     - DELETE api/categorias/id
+
+//ME ACABO DE DAR CUENTA QUE - GET api/categorias/1/productos Y  - GET filterByCategory ES LO MISMO, 
+    //HAY QUE VER DE AGREGAR OTROS TIPOS DE FILTROS
 ---- 
 token : 
+
    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsInVzdWFyaW8iOiJ3ZWJhZG1pbiIsInJvbGVzIjpbIkFETUlOIiwiVVNFUiIsIkJBTkFOQSJdLCJleHAiOjE3NjI4ODc3NTZ9.xTA-jqHrLuT9B65VxLhyH_iBZFfCG0898G3mVNWDdiU"
