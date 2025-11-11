@@ -9,6 +9,12 @@ README:
 - 
 ### Qué contiene este proyecto:
 
+TP3
+|__ app
+|__ config
+|__ database
+
+
 api_router.php - Entry point para los endpoints de la API.
 app/controllers/ - Controladores, por ejemplo task-api.controller.php.
 app/models/ - Modelos, por ejemplo task.model.php.
@@ -23,7 +29,7 @@ libs/router/README.md
 
 Endpoints
 
-| Método  | Endpoint                                | Descripción |
+| MÉTODO  | ENDPOINT                                | DESCRIPCIÓN |
 |---------|-----------------------------------------|--------------|
 | GET     | api/productos                                           | Ver lista de productos |
 | GET     | api/productos/id                                        | Ver un producto específico por ID |
