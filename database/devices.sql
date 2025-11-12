@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-10-2025 a las 17:56:42
+-- Tiempo de generación: 12-11-2025 a las 22:57:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -82,13 +82,60 @@ INSERT INTO `products` (`id`, `name`, `img`, `model`, `price`, `description`, `i
 (22, 'Apple Watch Series 12', 'https://http2.mlstatic.com/D_NQ_NP_611645-MLA91903698062_092025-O.webp', 'Series 12', 550, 'Reloj inteligente con medición de oxígeno y ECG.', 2),
 (23, 'AirPods Max', 'https://http2.mlstatic.com/D_NQ_NP_920403-MLU79116952765_092024-OO.jpg', 'Max', 600, 'Auriculares circumaurales con sonido envolvente y cancelación de ruido.', 3),
 (24, 'Apple Pencil 2nd Gen', 'https://http2.mlstatic.com/D_NQ_NP_612377-MLA81240009786_122024-O.webp', '2nd Gen', 150, 'Lápiz inteligente para iPad con precisión y respuesta rápida.', 5),
-(26, 'iPad Mini', 'https://http2.mlstatic.com/D_NQ_NP_820198-CBT88923911520_082025-OO.jpg', 'Mini 2025', 700, 'Tablet pequeña y potente, ideal para movilidad.', 1),
+(26, 'Producto Editadoo', 'imagen.jpg', 'Modelo X', 1200, 'Descripción del producto', 2),
 (27, 'HomePod 2', 'https://http2.mlstatic.com/D_NQ_NP_850763-MLA87783387438_072025-OO.jpg', 'Segunda Gen', 350, 'Altavoz inteligente con sonido mejorado y Siri.', 4),
 (28, 'Magic Keyboard Mac', 'https://http2.mlstatic.com/D_NQ_NP_890506-MLU76759497777_052024-OO.jpg', 'Mac Edition', 130, 'Teclado inalámbrico especialmente para Mac.', 5),
 (29, 'Magic Mouse Pro', 'https://http2.mlstatic.com/D_NQ_NP_684898-CBT84589318828_052025-O.webp', 'Pro', 90, 'Ratón avanzado con superficie táctil y Bluetooth.', 5),
 (30, 'Apple Watch Ultra', 'https://http2.mlstatic.com/D_NQ_NP_871389-MLU77501910275_072024-OO.jpg', 'Ultra', 800, 'Reloj inteligente con batería extendida y resistencia al agua.', 2),
 (32, 'Apple Watch 2025', 'https://m.media-amazon.com/images/I/71mbZF8PT1L._AC_SY300_SX300_QL70_FMwebp_.jpg', '30.0', 250, 'Nuevo Apple Watch', 2),
-(35, 'Cable de carga USB-C', 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MQKJ3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=UmJ0VnhkMm9DbDhxclVzaXlNbnVRUWtuVHYzMERCZURia3c5SzJFOTlPaEdPNk5TZkUyRjVjbmZlVkFhb3BFYmQzOU5RUU0yVjg1T0JNOVNCMVhGU0E', '60 W (1 metro)', 25, 'Este cable de carga de 1 metro tiene un diseño trenzado, incluye conectores USB-C en ambos extremos y es perfecto para cargar, sincronizar y transferir datos entre dispositivos USB-C.', 5);
+(35, 'Cable de carga USB-C', 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MQKJ3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=UmJ0VnhkMm9DbDhxclVzaXlNbnVRUWtuVHYzMERCZURia3c5SzJFOTlPaEdPNk5TZkUyRjVjbmZlVkFhb3BFYmQzOU5RUU0yVjg1T0JNOVNCMVhGU0E', '60 W (1 metro)', 25, 'Este cable de carga de 1 metro tiene un diseño trenzado, incluye conectores USB-C en ambos extremos y es perfecto para cargar, sincronizar y transferir datos entre dispositivos USB-C.', 5),
+(38, 'Producto Nuevo', 'imagen.jpg', 'Modelo X', 1200, 'Descripción del producto', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `review` varchar(250) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `id_product` int(11) NOT NULL,
+  `calification` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `name`, `review`, `created_at`, `id_product`, `calification`) VALUES
+(1, 'María', 'Excelente diseño y precisión en el seguimiento de salud.', '2025-11-12 18:37:07', 2, 5),
+(2, 'Juan', 'Batería duradera, pero un poco caro.', '2025-11-12 18:37:07', 2, 4),
+(3, 'Lucía', 'Muy cómodo y ligero, ideal para todo el día.', '2025-11-12 18:37:07', 2, 5),
+(4, 'Pedro', 'Sonido increíble y cancelación de ruido efectiva.', '2025-11-12 18:37:07', 3, 5),
+(5, 'Ana', 'Un poco incómodos para usar por varias horas.', '2025-11-12 18:37:07', 3, 4),
+(6, 'Carlos', 'Pequeño pero potente, excelente sonido para su tamaño.', '2025-11-12 18:37:07', 6, 5),
+(7, 'Sofía', 'Imagen clara y fluida, ideal para streaming.', '2025-11-12 18:37:07', 8, 5),
+(8, 'Diego', 'Funciona perfecto con mi iPhone y Mac.', '2025-11-12 18:37:07', 8, 4),
+(9, 'Valentina', 'Escribir es cómodo y silencioso.', '2025-11-12 18:37:07', 9, 5),
+(10, 'Martín', 'Buena respuesta táctil, pero el tamaño podría mejorar.', '2025-11-12 18:37:07', 10, 4),
+(11, 'Mariana', 'Buen reloj por el precio, funciones suficientes.', '2025-11-12 18:37:07', 13, 4),
+(12, 'Alejandro', 'Sonido aceptable, pero esperaba mejor cancelación.', '2025-11-12 18:37:07', 14, 3),
+(13, 'Florencia', 'Excelente calidad de audio y diseño elegante.', '2025-11-12 18:37:07', 15, 5),
+(14, 'Gonzalo', 'Streaming sin problemas, aunque no es 4K.', '2025-11-12 18:37:07', 16, 4),
+(15, 'Patricio', 'Gestos multitáctiles muy precisos.', '2025-11-12 18:37:07', 18, 5),
+(16, 'Camila', 'Potente y silenciosa, ideal para oficina.', '2025-11-12 18:37:07', 19, 5),
+(17, 'Hernán', 'Muy buen rendimiento, aunque algo caro.', '2025-11-12 18:37:07', 19, 4),
+(18, 'Laura', 'Excelente cancelación de ruido.', '2025-11-12 18:37:07', 20, 5),
+(19, 'Tomás', 'Buen seguimiento de salud y actividad.', '2025-11-12 18:37:07', 22, 4),
+(20, 'Sofía', 'Sonido envolvente y cómodo para largas sesiones.', '2025-11-12 18:37:07', 23, 5),
+(21, 'Nicolás', 'Perfecta precisión al escribir y dibujar.', '2025-11-12 18:37:07', 24, 5),
+(22, 'Marta', 'Teclado muy cómodo y compatible con Mac.', '2025-11-12 18:37:07', 28, 5),
+(23, 'Diego', 'Excelente respuesta y diseño minimalista.', '2025-11-12 18:37:07', 29, 5),
+(24, 'Clara', 'Muy resistente y batería de larga duración.', '2025-11-12 18:37:07', 30, 5),
+(25, 'Julieta', 'Funciona correctamente, buena longitud.', '2025-11-12 18:37:07', 35, 4);
 
 -- --------------------------------------------------------
 
@@ -127,6 +174,13 @@ ALTER TABLE `products`
   ADD KEY `fk_category` (`id_category`);
 
 --
+-- Indices de la tabla `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_product` (`id_product`) USING BTREE;
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -140,13 +194,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT de la tabla `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -163,6 +223,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `fk_category` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`);
+
+--
+-- Filtros para la tabla `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

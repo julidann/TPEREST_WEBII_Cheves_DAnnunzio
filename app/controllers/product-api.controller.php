@@ -40,12 +40,22 @@ class ProductApiController
         }
     
         
-        $filterByCategory = false;
-        if (isset($req->query->filterByCategory)){
-            $filterByCategory = $req->query->filterByCategory;
+        $filterByName = false;
+        if (isset($req->query->filterByName)){
+            $filterByName = $req->query->filterByName;
         }
 
-        $products = $this->productModel->getAll($orderBy, $order, $filterByCategory);
+       $limit = false;
+        if (isset($req->query->limit)){
+            $limit = $req->query->limit;
+        }
+
+        $page = false;
+        if (isset($req->query->page)){
+            $page = $req->query->page;
+        }
+
+        $products = $this->productModel->getAll($orderBy, $order, $filterByName, $limit, $page);
 
         return $res->json([
             'products' => $products,
