@@ -8,8 +8,17 @@ README:
 - API REST Catálogo de productos para una Tienda de Dispositivos Tecnológicos Apple.
 
 -----
+### Nueva tabla reviews
+Se crea una nueva tabla de reseñas para que los usuarios puedan poner un comentario sobre el producto que compraron.
+reviews
+- id (PK)    INT
+- name       VARCHAR
+- review    VARCHAR
+- created_at  DATE (automático)
+- id_product (FK)
+- calification INT (del 1 al 5)
+- 
 ### Objetivo del proyecto
-
 
 Nuestra API REST permite que otros sitios o aplicaciones móviles puedan consultar el catálogo de productos Apple que tenemos disponible. Esto facilita que desarrolladores externos integren la información de los productos en sus propias plataformas o apps, manteniéndose siempre actualizados con los datos oficiales.
 
@@ -157,3 +166,4 @@ Endpoint: GET /api/reseñas
 - En el caso del filtrado, ordenamiento y paginacion, las URL's se pueden combinar, por ejemplo:
     -   api/productos?orderBy=model&order=ASC&limit=5&page=1 
 -  Una vez que el usuario inicia sesión en POSTMAN, con la BasicAuth (webadmin-admin), ya con el TOKEN puede editar, crear o eliminar un producto o categoría.
+
